@@ -53,7 +53,7 @@ if(mysqli_num_rows($res)>0)
   }
 }else{
   echo "<tr>
-        <td colspan='3' align='center'>No Category Found</td>
+        <td colspan='4' align='center'>No Category Found</td>
   </tr>";
 }
 
@@ -157,7 +157,7 @@ if(mysqli_num_rows($res)>0)
         success: function(data) {
           console.log(data);
           $('#basicModal').modal('hide');
-        //  location.reload();
+             location.reload();
         //  $('#tblcontent').html(data);
        },
      }

@@ -87,7 +87,7 @@ if(mysqli_num_rows($res)>0)
   }
 }else{
   echo "<tr>
-        <td colspan='3' align='center'>No Component Found</td>
+        <td colspan='7' align='center'>No Component Found</td>
   </tr>";
 }
 

@@ -68,7 +68,7 @@ $_SESSION['BillNO']='';
               }
             }else{
               echo "<tr>
-                    <td colspan='3' align='center'>No Component Found</td>
+                    <td colspan='9' align='center'>No Component Found</td>
               </tr>";
             }
 

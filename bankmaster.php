@@ -58,7 +58,7 @@ include('header/header.php');
                 }
                 }else{
                 echo "<tr>
-                        <td colspan='3' align='center'>No Category Found</td>
+                        <td colspan='7' align='center'>No Category Found</td>
                 </tr>";
                 }
 
