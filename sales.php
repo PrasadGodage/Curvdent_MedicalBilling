@@ -35,6 +35,7 @@ while ($row = mysqli_fetch_assoc($result1)) {
 
       <h3>Sales Panel</h3>
       <div class="row justify-content-end">
+      <a  class="btn btn-info mr-3" href="customermaster.php">Create New Customer</a>
       <a  class="btn btn-primary" href="managesales.php">View All Bills</a>
       </div>
       <hr>

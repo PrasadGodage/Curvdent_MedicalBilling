@@ -7,36 +7,13 @@ include('config.php');
 date_default_timezone_set("Asia/Calcutta");
 $today=date('Y-m-d');
 
-
-// function getusernamebyvchid($con,$vchid)
-// {
-//     $selectquery = "SELECT * FROM `vouchersdtls` where `vouchersid`='$vchid' AND `DRCRtype`='DR'";
-//     //  echo $selectquery;
-//    $result = mysqli_query($con, $selectquery);
-//    $row = mysqli_fetch_assoc($result);
-//    $legerid=$row['ledgerid'];
-
-//    echo getPartyNameByLegerid($con,$legerid);
-// }
-
-
-
-// function getPartyNameByLegerid($con,$legerid)
-// {
-//     $selectquery = "SELECT * FROM `ledgermaster` where `ledgerid`='$legerid'";
-//     //   echo $selectquery;
-//    $result = mysqli_query($con, $selectquery);
-//    $row = mysqli_fetch_assoc($result);
-//    $ledgername=$row['ledgername'];
-//    return $ledgername;
-// }
 ?>
 
 
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-        <div class="row ">
+        <!-- <div class="row ">
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
@@ -48,7 +25,7 @@ $today=date('Y-m-d');
                           <h5 class="font-15">Total Users</h5>
                           <h2 class="mb-3 font-18">
                           <?php
-                            $usersql="SELECT * FROM `userlogin`";
+                          //  $usersql="SELECT * FROM `userlogin`";
                             // echo mysqli_num_rows(mysqli_query($con,$usersql));
                             ?>
                           </h2>
@@ -76,7 +53,7 @@ $today=date('Y-m-d');
                           <h5 class="font-15">Running Orders</h5>
                           <h2 class="mb-3 font-18">
                           <?php
-                            $usersql="SELECT * FROM `partydata`";
+                           // $usersql="SELECT * FROM `partydata`";
                             // echo mysqli_num_rows(mysqli_query($con,$usersql));
                             ?>
                           </h2>
@@ -103,7 +80,7 @@ $today=date('Y-m-d');
                           <h2 class="mb-3 font-18">
                             
                           <?php
-                            $usersql="SELECT * FROM `challanrecord` WHERE `date`='$today'";
+                          //  $usersql="SELECT * FROM `challanrecord` WHERE `date`='$today'";
                             // echo mysqli_num_rows(mysqli_query($con,$usersql));
                             ?>
                           </h2>
@@ -131,7 +108,7 @@ $today=date('Y-m-d');
                           <h2 class="mb-3 font-18">
                           
                           <?php
-                            $usersql="SELECT * FROM `challanrecord`";
+                            //$usersql="SELECT * FROM `challanrecord`";
                             // echo mysqli_num_rows(mysqli_query($con,$usersql));
                             ?>
 
@@ -148,38 +125,76 @@ $today=date('Y-m-d');
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         
 
 
 
+
+          <h3>Todays Bills</h3>
+     
 <hr>
 
-          
-      <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-        <thead>
-          <tr>
+                  <table class="table table-striped table-hover" id="" style="width:100%;">
+                          <thead>
+                            <tr>
+                              <th>id</th>
+                              <th>Bill NO</th>
+                              <th>Bill Date</th>
+                              <th>Bill TO</th>
+                              <th>Payment Type</th>
+                              <th>Taxable</th>
+                              <th>Total Tax</th>
+                              <th>Net Total</th>
+                              <th>Remove Bill</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php
 
-            <th>#</th>
-            <th>Item code</th>
-            <th>Category</th>
-            <th>BO/IH</th>
-            <th>Basic Material</th>
-            <th>Drg.No</th>
-            <th>Length</th>
-            <th>Dia</th>
-            <th>Gross Wt.</th>
-            <th>Net Wt.</th>
-            <th>Child Code</th>
-            <th>Action</th>
+                              $selectmenulist="SELECT * FROM `sales`where `BillDate`='$today'  ORDER BY `sales`.`BillId` DESC";
 
-          </tr>
-        </thead>
-        <tbody>
+                              $res=mysqli_query($con,$selectmenulist);
 
-      
-        </tbody>
-      </table>
+                              if(mysqli_num_rows($res)>0)
+                              {
+                                $num=1;
+                                  while($row=mysqli_fetch_array($res))
+                                  {?>
+                                      <tr>
+                                        <!-- <td><?php //echo $num; ?></td> -->
+                                        
+                                        <td><?php echo $row['BillId']; ?></td>
+                                        <td><?php echo $row['BillNo']; ?></td>
+                                        <td><?php echo $row['BillDate']; ?></td>
+                                        <td><?php
+                                        echo getcustomernameById($con,$row['CustId']);
+                                          ?></td>
+                                        <td><?php echo $row['PaymentType']; ?></td>
+                                        <td><?php echo $row['TaxableTotal']; ?></td>
+                                        <td><?php echo $row['TotalTax']; ?></td>
+                                        <td><?php echo $row['NetTotal']; ?></td>
+                                        <!-- <td><button class="btn btn-primary mr-1" onclick="select()">View Bill</button><button class="btn btn-danger">X</button></td> -->
+                                        <td><button class="btn btn-primary mr-1" onclick="viewbill('<?php  echo $row['BillNo'] ?>')">View Bill</button><button class="btn btn-danger">X</button></td>
+                                                  
+                                        
+                                      </tr>
+                                  <?php 
+                                  $num++;
+                                }
+                              }else{
+                                echo "<tr>
+                                      <td colspan='9' align='center'>No Component Found</td>
+                                </tr>";
+                              }
+
+
+
+                              ?>
+
+                          
+                          </tbody>
+                        </table>
           
                   </div>
                 </div>
