@@ -57,9 +57,9 @@ $Address=$row['Address'];
                 </div>
                 <div class="col-9">
                    <center>
-                    <h1>Curvdent Health Care </h1>
-                    <p>Expert Dental Clinic, Tajane Mala, Sangamner, 422605</p>
-                    <p>Mobile: 9422792068 , State: Maharashtra</p>
+                    <h1>CURVEDENT   HEALTH CARE PRIVATE LIMITED</h1>
+                    <p>CURVDENT CLINIC, NAVIN NAGAR ROAD, SANGAMNER, DIST : AHMEDNAGAR - 422605</p>
+                    <p>Mobile: 9143950950 , State: Maharashtra</p>
                    </center>
                 </div>
             </div>
@@ -149,13 +149,13 @@ $Address=$row['Address'];
 
               <div class="row">
                 <div class="col-7">
-                    <B>BANK DETAILS</B>
-                    <P>Name: SPARKSOUL INFOTECH PRIVATE LIMITED</P>
+                    <!-- <B>BANK DETAILS</B>
+                    <P>Name: CURVEDENT HEALTH CARE PVT.LTD</P>
                     
                     <P> <br>
                         IFSC Code: ICIC0001095<br>
                         Account No: 109505005440<br>
-                        Bank: ICICI Bank,SANGAMNER</P>
+                        Bank: ICICI Bank,SANGAMNER</P> -->
                 </div>
                 <div class="col-5 float-right">
                     <h6>TAXABLE AMOUNT ₹ <?php echo $TotalTaxable; ?></h6>
@@ -169,14 +169,14 @@ $Address=$row['Address'];
 
               <div class="row">
                 <div class="col-7">
-                    <p><b>TERMS AND CONDITIONS</b></p>
+                    <!-- <p><b>TERMS AND CONDITIONS</b></p>
                     <p>1. Domain & Hosting Charges belong to the client only.<br>
-                        2. All disputes are subject to Sangamner jurisdiction only</p>
+                        2. All disputes are subject to Sangamner jurisdiction only</p> -->
                 </div>
                 <div class="col-5">
                     <br>
                     <b>AUTHORISED SIGNATORY FOR</b>
-                    <p>SPARKSOUL INFOTECH PRIVATE LIMITED</p>
+                    <p>CURVEDENT HEALTH CARE PVT.LTD</p>
                 </div>
               </div>
         <!-- </div> -->

@@ -217,6 +217,32 @@ $today=date('Y-m-d');
     // console.log(date, 'change')
 });
 
+function viewbill(Billno) {
+      // alert(Billno);
+      // $.session.set("BillNO", Billno);
+      // 
+        $.ajax({
+        url: "Billsales_backend.php",
+        type: "POST",
+        data: {
+          Billno:Billno,                
+        },
+        success: function(data) {
+          console.log(data);
+          if(data.trim()==="SET")
+          {
+            location.href = "BillA4.php";
+          }else
+          {
+            alert('Facing Error in Bill Design')
+          }
+          
+       },
+     }
+     );
+    }
+
+ 
 
 function getdataforrecipt(reciptdate)
 {
