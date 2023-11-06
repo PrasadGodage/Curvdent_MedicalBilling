@@ -391,7 +391,11 @@ while ($row = mysqli_fetch_assoc($result1)) {
       {
         // alert("Please Select Customer Name")
         Swal.fire('Please Select Customer Name');
-      }else{
+      }else if(BillAmountForPaid=="" || BillAmountForPaid=="NAN" || BillAmountForPaid==0)
+      {
+        Swal.fire('Please Add Items In Bill');
+      }
+      else{
             // selectBank
             $.ajax({
             url: "sales_backend.php",
@@ -790,6 +794,14 @@ $("#BillDiscount").keyup(function(){
 
 
 
+     if(Qty=="" || Qty==0)
+     {
+        Swal.fire("Please Enter Quantity");
+     }else if(Rate=="" || Rate==0)
+     {
+        Swal.fire("Please Enter Rate");
+     }else
+     {
         $.ajax({
         url: "sales_backend.php",
         type: "POST",
@@ -822,7 +834,7 @@ $("#BillDiscount").keyup(function(){
        },
      }
      );
-
+     }
 
 
     }

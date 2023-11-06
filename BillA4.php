@@ -57,7 +57,7 @@ $Address=$row['Address'];
                 </div>
                 <div class="col-9">
                    <center>
-                    <h1>CURVEDENT   HEALTH CARE PRIVATE LIMITED</h1>
+                    <h1>CURVEDENT HEALTH CARE PVT.LTD</h1>
                     <p>CURVDENT CLINIC, NAVIN NAGAR ROAD, SANGAMNER, DIST : AHMEDNAGAR - 422605</p>
                     <p>Mobile: 9143950950 , State: Maharashtra</p>
                    </center>
@@ -85,9 +85,9 @@ $Address=$row['Address'];
                         <th>Item Name</th>
                         <th>Qty</th>
                         <th>Rate</th>
-                        <th>Taxable Amt</th>
+                        <!-- <th>Taxable Amt</th>
                         <th>Tax(%)</th>
-                        <th>Tax Amt</th>
+                        <th>Tax Amt</th> -->
                         <th>Net Total</th>
                     </tr>
                 </thead>
@@ -119,9 +119,9 @@ $Address=$row['Address'];
                                 <td><?php echo getitemnamebyID($con,$row['ItemId']); ?></td>
                                 <td><?php echo $row['Qty']; ?></td>
                                 <td><?php echo $row['Rate']; ?></td>
-                                <td><?php echo $row['TaxableAmt']; ?></td>
-                                <td><?php echo getitemTaxpercentbyID($con,$row['ItemId']); ?></td>
-                                <td><?php echo $row['TaxAmt1']*2; ?></td>
+                                <!-- <td><?php //echo $row['TaxableAmt']; ?></td> -->
+                                <!-- <td><?php //echo getitemTaxpercentbyID($con,$row['ItemId']); ?></td> -->
+                                <!-- <td><?php //echo $row['TaxAmt1']*2; ?></td> -->
                                 <td><?php echo $row['NetAmt']; ?></td>
                                 </tr>
                             <?php 
@@ -139,9 +139,9 @@ $Address=$row['Address'];
                     <tr>
                         <td colspan="4" class="text-end"><b>SubTotal</b></td>
                         
-                        <td><b><?php echo $TotalTaxable; ?></b></td>
-                        <td></td>
-                        <td><b><?php echo $TotalTaxAmt; ?></b></td>
+                        <!-- <td><b><?php //echo $TotalTaxable; ?></b></td> -->
+                        <!-- <td></td> -->
+                        <!-- <td><b><?php //echo $TotalTaxAmt; ?></b></td> -->
                         <td><b><?php echo $NetTotal; ?></b></td>
                     </tr>
                 </tbody>
@@ -158,11 +158,11 @@ $Address=$row['Address'];
                         Bank: ICICI Bank,SANGAMNER</P> -->
                 </div>
                 <div class="col-5 float-right">
-                    <h6>TAXABLE AMOUNT ₹ <?php echo $TotalTaxable; ?></h6>
+                    <!-- <h6>TAXABLE AMOUNT ₹ <?php// echo $TotalTaxable; ?></h6> -->
                     <hr>
                     <h6>TOTAL AMOUNT ₹ <?php echo $NetTotal; ?></h6>
                     <hr>
-                    <p>Received Amount ₹ 0</p>
+                    <!-- <p>Received Amount ₹ 0</p> -->
                   
                 </div>
               </div>
