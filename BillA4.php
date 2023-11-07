@@ -30,11 +30,21 @@ $SubPaymentType=$row['SubPaymentType'];
 $SelectCustomerData = "SELECT * FROM `customermaster` where `CustId`='$CustomerID'";
 //  echo $SelectCustomerData;
 $Customerres = mysqli_query($con, $SelectCustomerData);
-$row = mysqli_fetch_assoc($Customerres);
-$CustName=$row['CustName'];
-$Address=$row['Address'];
-
-
+$row1 = mysqli_fetch_assoc($Customerres);
+$CustName=$row1['CustName'];
+$Address=$row1['Address'];
+//-----------------------------------------------------------------
+//------------------------ Company Data ---------------------------
+$comapanyquery = "SELECT * FROM `firmmaster` where `FirmId`='2'";
+//  echo $comapanyquery;
+$companyres = mysqli_query($con, $comapanyquery);
+$row2 = mysqli_fetch_assoc($companyres);
+$firmName=$row2['FirmName'];
+$firmAddress=$row2['FirmAddress'];
+$firmMOB=$row2['FirmNo'];
+$firmEmail=$row2['FirmEmail'];
+$firmgst=$row2['FirmGst'];
+$firmlogo=$row2['LogoAddress'];
 
 
 ?>
@@ -53,13 +63,13 @@ $Address=$row['Address'];
         <!-- <div class="container"> -->
             <div class="row">
                 <div class="col-3">
-                <img src="images/curevelogo.png" height="150px" width="200px" alt="">
+                <img src="<?php echo $firmlogo; ?> " height="150px" width="200px" alt="">
                 </div>
                 <div class="col-9">
                    <center>
-                    <h1>CURVEDENT HEALTH CARE PVT.LTD</h1>
-                    <p>CURVDENT CLINIC, NAVIN NAGAR ROAD, SANGAMNER, DIST : AHMEDNAGAR - 422605</p>
-                    <p>Mobile: 9143950950 , State: Maharashtra</p>
+                    <h1><?php echo $firmName; ?> </h1>
+                    <p><?php echo $firmAddress; ?></p>
+                    <p>Mobile: <?php echo $firmMOB; ?> , State: Maharashtra</p>
                    </center>
                 </div>
             </div>
@@ -169,14 +179,14 @@ $Address=$row['Address'];
 
               <div class="row">
                 <div class="col-7">
-                    <!-- <p><b>TERMS AND CONDITIONS</b></p>
+                    <p><b>TERMS AND CONDITIONS</b></p>
                     <p>1. Domain & Hosting Charges belong to the client only.<br>
-                        2. All disputes are subject to Sangamner jurisdiction only</p> -->
+                        2. All disputes are subject to Sangamner jurisdiction only</p>
                 </div>
                 <div class="col-5">
                     <br>
                     <b>AUTHORISED SIGNATORY FOR</b>
-                    <p>CURVEDENT HEALTH CARE PVT.LTD</p>
+                    <p><?php echo $firmName; ?></p>
                 </div>
               </div>
         <!-- </div> -->

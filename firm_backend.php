@@ -26,6 +26,23 @@ include('functions.php');
     // }
 
 }
+    if(isset($_POST['hidden_id']) && isset($_POST['upfirmname']) && isset($_POST['upfirmaddress']) && isset($_POST['upfirmdisc']) && 
+	isset($_POST['upfirmno']) && isset($_POST['upfirmemail']) && isset($_POST['upfirmgst']) && isset($_POST['upfirmpan']) && isset($_POST['upprifix']))
+{
+
+   $updatefirmsql="UPDATE `firmmaster` SET `FirmName`='$upfirmname',`FirmAddress`='$upfirmaddress',`FirmDisc`='$upfirmdisc',`FirmNo`='$upfirmno',`FirmEmail`='$upfirmemail',`FirmGst`='$uptxtgstin',`FirmPAN`='$upfirmpan',`prefix`='$upprifix' WHERE `FirmId`='$hidden_id'";
+
+        echo $updatefirmsql;
+
+            if(mysqli_query($con,$updatefirmsql))
+            {			
+
+            $output="Done";
+
+            }
+            echo $output;
+
+}
 
 
 if (isset($_POST['updateid']))
@@ -33,8 +50,8 @@ if (isset($_POST['updateid']))
 
 
 		$itemid=$_POST['updateid'];
-		$selectquery="SELECT * FROM `itemmaster` where `ItemId `='$itemid'";
-
+		$selectquery="SELECT * FROM `firmmaster` where `FirmId`='$itemid'";
+        // echo $selectquery;
 		$result=mysqli_query($con,$selectquery);
 		$responce=array();
 
@@ -61,5 +78,16 @@ else
 	}
 
 
+
+    
+		///delete data
+		if(isset($_POST['deleteid']))
+		{
+				$deleteid=$_POST['deleteid'];
+		  $sql="DELETE FROM `firmmaster` WHERE FirmId='$deleteid'";
+		  //echo($sql);
+		  mysqli_query($con,$sql);
+
+		}
 
 ?>

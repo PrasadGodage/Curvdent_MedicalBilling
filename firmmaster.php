@@ -1,6 +1,10 @@
 <?php
 include('header/header.php');
 
+ //Set session variables.
+  // $_SESSION["favcolor"] = "green";
+  // $_SESSION["FirmId"] =$num;
+  //  echo $num;
 
 $query = "SELECT * FROM unitmaster";
 $result = mysqli_query($con, $query);
@@ -15,17 +19,8 @@ while ($row1 = mysqli_fetch_assoc($result1)) {
     $categoryList.='<option value="' . $row1['CategoryId'] . '">' .$row1['CategoryName']."</option>'";
 }
 
-// function getcategorynamebyid($con,$id)
-// {
-//     $selectquery = "SELECT * FROM `categorymaster` where `CategoryId `='$id'";
-//       echo $selectquery;
-//       $GradeName="No Record Found";
-//    $result = mysqli_query($con, $selectquery);
-//    $row = mysqli_fetch_assoc($result);
-//    $GradeName=$row['CategoryName'];
 
-//    return $GradeName;
-// }
+
 ?>
 
 
@@ -65,39 +60,46 @@ $selectmenulist="SELECT * FROM `firmmaster`";
 
 $res=mysqli_query($con,$selectmenulist);
 
-if(mysqli_num_rows($res)>0)
-{
-  $num=1;
-		while($row=mysqli_fetch_array($res))
-   {?>
-        <tr>
-          <td><?php echo $num; ?></td>
-          
-          <td><?php echo $row['FirmName']; ?></td>
-          <td><?php echo $row['FirmNo']; ?></td>
-          <td><?php echo $row['FirmEmail']; ?></td>
-          <td><?php echo $row['FirmGst']; ?></td>
-          <td><?php echo $row['FirmPAN']; ?></td>
-          <!-- <td><?php //echo getcategorynamebyid($con,$row['ItemGroupId']); ?></td> -->
-          <td><?php if($row['LogoAddress']=="")
-          {?>
-              <button class="btn btn-success" onclick="">Upload Logo</button>
-          <?php }else{ 
-            echo $row['LogoAddress'];
-            }
-            ?></td>
-          <td>
-          <button class="btn btn-warning" onclick="getdata(<?php echo $row['FirmId']; ?>)"><i data-feather="edit"></i></button>
-          <button class="mt-1 btn btn-danger" onclick="deletedata(<?php echo $row['FirmId']; ?>)">X</button></td>
-        </tr>
-    <?php 
-    $num++;
-  }
-}else{
-  echo "<tr>
-        <td colspan='8' align='center'>No Component Found</td>
-  </tr>";
-}
+    if(mysqli_num_rows($res)>0)
+    {
+      $num=1;
+        while($row=mysqli_fetch_array($res))
+      {?>
+            <tr>
+              <td><?php echo $num; ?></td>
+              
+              <td><?php echo $row['FirmName']; ?></td>
+              <td><?php echo $row['FirmNo']; ?></td>
+              <td><?php echo $row['FirmEmail']; ?></td>
+              <td><?php echo $row['FirmGst']; ?></td>
+              <td><?php echo $row['FirmPAN']; ?></td>
+              <!-- <td><?php //echo getcategorynamebyid($con,$row['ItemGroupId']); ?></td> -->
+              <td><?php if($row['LogoAddress']=="")
+              {?>
+
+                <!-- <td> -->
+                    
+                    <button class="btn btn-success" onclick="openLogoModal(<?php echo $row['FirmId']; ?>)" id="uploadLogoButton">Upload Logo</button>
+                      </td>
+
+                  <!-- </td> -->
+      <?php }else{ 
+                echo '<img src="'.$row['LogoAddress'].'" width="50" height="50" onclick="openLogoModal('.$row['FirmId'].')">';
+                // echo $row['LogoAddress'];
+                }
+                ?></td>
+              <td>
+              <button class="btn btn-warning" onclick="getdata(<?php echo $row['FirmId']; ?>)"><i data-feather="edit"></i></button>
+              <button class="mt-1 btn btn-danger" onclick="deletedata(<?php echo $row['FirmId']; ?>)">X</button></td>
+            </tr>
+        <?php 
+        $num++;
+      }
+    }else{
+      echo "<tr>
+            <td colspan='3' align='center'>No Component Found</td>
+      </tr>";
+    }
 
 
 
@@ -121,7 +123,7 @@ if(mysqli_num_rows($res)>0)
                 </button>
               </div>
               <div class="modal-body">
-                <form action="">
+                <!-- <form action=""> -->
                   <!-- <label for="">Item Code</label>
                   <input type="text" class="form-control" id="txtitemcode"> -->
                   <label for="">Firm Name</label>
@@ -152,7 +154,7 @@ if(mysqli_num_rows($res)>0)
                     </div>
                     <label for="">Bill Prefix</label>
                   <input type="text" class="form-control" id="txtprifix">
-                </form>
+                <!-- </form> -->
               </div>
               <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-primary" onclick="saveitem()">Save</button>
@@ -163,85 +165,87 @@ if(mysqli_num_rows($res)>0)
         </div>
   <!-- model ends -->
 
-
-  <!-- update item model code started -->
-  
   <!-- model started -->
   <div class="modal fade" id="Updateitemmodel" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Update Item</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Update Firm Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form action="">
-                  <!-- <label for="">Item Code</label>
-                  <input type="text" class="form-control" id="txtitemcode"> -->
-                  <label for="">Item Name</label>
-                  <input type="text" class="form-control" id="upitemname">
-                  <label for="">Disc</label>
-                  <textarea name="" id="upitemdisc" cols="30" rows="10" class="form-control"></textarea>
-                  <!-- <label for="">Item Category</label>
-                  <input type="text" class="form-control" id="itemcategory"> -->
-                
-<!--                   
+                  <!-- <label for="">Item Code</label> -->
+                  <input type="hidden" class="form-control" id="hiddden_id"> 
+                  <label for="">Firm Name</label>
+                  <input type="text" class="form-control" id="uptxtfirmname">
+                  <label for="">Address</label>
+                  <textarea name="" id="uptxtaddress" cols="30" rows="10" class="form-control"></textarea>
+                  <label for="">Discription</label>
+                  <textarea name="" id="uptxtdisc" cols="30" rows="10" class="form-control"></textarea>                
                   <div class="form-row mt-2">
                         <div class="form-group col-md-6">
-                        <label for="">Length</label>
-                  <input type="text" class="form-control" id="itemlength">
+                            <label for="">Contact No</label>
+                            <input type="text" class="form-control" id="uptxtcontactno">
                         </div>
                         <div class="form-group col-md-6">
-                        <label for="">Dia</label>
-                  <input type="text" class="form-control" id="itemdia">
+                            <label for="">Email</label>
+                            <input type="text" class="form-control" id="uptxtemail">
                         </div>
-                    </div> -->
-                 
-                 
-<!-- 
+                    </div>
                   <div class="form-row mt-2">
                         <div class="form-group col-md-6">
-                            <label for="">Gross Wt</label>
-                            <input type="text" class="form-control" placeholder="0.00" id="gweight">
+                            <label for="">GSTIN</label>
+                            <input type="text" class="form-control" id="uptxtgstin">
                         </div>
                         <div class="form-group col-md-6">
-                        <label for="">Net Wt</label>
-                            <input type="text" class="form-control" placeholder="0.00" id="nweight">
+                            <label for="">PAN</label>
+                            <input type="text" class="form-control" id="uptxtpan">
                         </div>
-                    </div> -->
-                    <label for="">Unit</label>
-                 <select name="" id="upslsunit" class="form-control">
-                 <?php echo $unitlist;  ?>
-                 </select>
-
-                  <label for="">Category</label>
-                 <select name="" id="upslscategory" class="form-control">
-                 <?php echo $categoryList;  ?>
-                 </select>
-                  <label for="">Tax Rate</label>
-                 <select name="" id="upslstaxrate" class="form-control">
-                      <option value="0">0%</option>
-                      <option value="5">5%</option>
-                      <option value="12">12%</option>
-                      <option value="18">18%</option>
-                      <option value="28">28%</option>
-                 </select>
-                 <label for="">Rate</label>
-                  <input type="text" class="form-control" id="upitemrate" placeholder="0.00">
-                </form>
+                    </div>
+                    <label for="">Bill Prefix</label>
+                  <input type="text" class="form-control" id="uptxtprifix">
               </div>
               <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-primary" onclick="saveitem()">Save</button>
+                <button type="button" class="btn btn-primary" onclick="updatecate()">Save</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
         </div>
   <!-- model ends -->
-  <!-- Code Ends -->
+
+
+  <div class="modal fade" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="logoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoModalLabel">Upload Logo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php if (isset($_GET['error'])): ?>
+                    <p><?php echo $_GET['error']; ?></p>
+                <?php endif; ?>
+
+                <!-- <form action="" method="POST" enctype="multipart/form-data"> -->
+                <form id="logoUploadForm" method="POST" enctype="multipart/form-data">
+                <input type="hidden" class="form-control" id="logohidden_id" name='FirmId'> 
+                <label for="">Choose New Logo</label>
+                    <input type="file" class='form-control' name="uploadFile" id="uploadFile">
+                    <input type="submit"  class='mt-2 btn btn-primary form-control' name="submit" value="Upload Image">
+                </form>
+            </div>
+         
+        </div>
+    </div>
+</div>
+  <!-- model ends -->
+
 
 
   <?php
@@ -251,6 +255,24 @@ if(mysqli_num_rows($res)>0)
   <script type="text/javascript">
     $(document).ready(function() {
       // alert('hii');
+      $('#logoUploadForm').submit(function(e) {
+        e.preventDefault();
+        
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: 'upload.php', // Replace with the URL that handles the file upload
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+              console.log(data);
+              location.reload();
+                // $('#message').html(data);
+            }
+        });
+    });
     });
 
     function saveitem() {
@@ -293,42 +315,57 @@ if(mysqli_num_rows($res)>0)
 
     function getdata(updateid) {
 
-      $.post("item_backend.php", {
+      $.post("firm_backend.php", {
         updateid: updateid
       }, function(data, status) {
         // alert("Successfully");
-        var item = JSON.parse(data);
-        console.log(item);
-        // //   $('#up_categoryname').val(user.name);
-        // $('#hidden_id').val(item.ItemId);
+        var Firmdata = JSON.parse(data);
+        console.log(Firmdata);
+        $('#hidden_id').val(updateid);
+        $('#uptxtfirmname').val(Firmdata.FirmName);
+        $('#uptxtaddress').val(Firmdata.FirmAddress);
+        $('#uptxtdisc').val(Firmdata.FirmDisc);
+        $('#uptxtcontactno').val(Firmdata.FirmNo);
+        $('#uptxtemail').val(Firmdata.FirmEmail);
+        $('#uptxtgstin').val(Firmdata.FirmGst);
+        $('#uptxtpan').val(Firmdata.FirmPAN);
+        $('#uptxtprifix').val(Firmdata.prefix);       
+
       });
       $('#Updateitemmodel').modal('show');
 
 
     }
 
-
-
-
     function updatecate() {
+      // alert('updauingthi the file');
       var hidden_id = $('#hidden_id').val();
-      var upcomponame = $('#upcomponame').val();
-      var upcompotype = $('#upcompotype').val();
+      var upfirmname = $('#uptxtfirmname').val();
+      var upfirmaddress = $('#uptxtaddress').val();
+      var upfirmdisc = $('#uptxtdisc').val();
+      var upfirmno = $('#uptxtcontactno').val();
+      var upfirmemail = $('#uptxtemail').val();
+      var upfirmgst = $('#uptxtgstin').val();
+      var upfirmpan = $('#uptxtpan').val();
+      var upprifix = $('#uptxtprifix').val();
      
 
      $.ajax({
-        url: "component_backend.php",
+        url: "firm_backend.php",
         type: "POST",
         data: {
           hidden_id: hidden_id,
-          upcomponame: upcomponame,
-          upcompotype: upcompotype,
+          upfirmname: upfirmname,
+          upfirmaddress: upfirmaddress,
+          upfirmdisc: upfirmdisc,
+          upfirmno: upfirmno,
+          upfirmemail: upfirmemail,
+          upfirmgst: upfirmgst,                  
+          upfirmpan: upfirmpan,   
+          upprifix: upprifix,       
         },
         success: function(data) {
           console.log(data);
-          // $('#basicModal').modal('hide');
-          location.reload();
-          // $('#tblcontent').html(data);
         },
       });
     }
@@ -336,37 +373,47 @@ if(mysqli_num_rows($res)>0)
 
     function deletedata(deleteid)
     {
-        // alert(id); 
-        
-  swal({
-    title: "Are you sure?",
-    text: "Once deleted, you will not be able to recover this Item!",
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
-  })
-  .then((willDelete) => {
-    if (willDelete) {
+            
+            swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this Firm!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
 
-      $.ajax({
-                    url: "component_backend.php",
-                    type: "POST",
-                    data: {deleteid:deleteid},
-                    success:function(data) {
-                      swal("Poof! Your imaginary file has been deleted!", {
-                        icon: "success",
-                      });
-                        location.reload(true);
-                       //alert("sucess");
-                //   readrecord();
-                    },
-                });
+                $.ajax({
+                              url: "firm_backend.php",
+                              type: "POST",
+                              data: {deleteid:deleteid},
+                              success:function(data) {
+                                swal("Poof! Your imaginary file has been deleted!", {
+                                  icon: "success",
+                                });
+                                  location.reload(true);
+                                //alert("sucess");
+                          //   readrecord();
+                              },
+                          });
 
 
-    } else {
+              } else {
+
+              }
+            });
 
     }
-  });
 
-    }
-  </script>
+  function openLogoModal(firmId) 
+  {
+
+    $('#logohidden_id').val(firmId);
+    $('#logoModal').modal('show');
+
+  }
+
+
+
+</script>
