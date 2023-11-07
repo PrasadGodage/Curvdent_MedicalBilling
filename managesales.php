@@ -59,7 +59,8 @@ $_SESSION['BillNO']='';
                       <td><?php echo $row['TotalTax']; ?></td>
                       <td><?php echo $row['NetTotal']; ?></td>
                       <!-- <td><button class="btn btn-primary mr-1" onclick="select()">View Bill</button><button class="btn btn-danger">X</button></td> -->
-                      <td><button class="btn btn-primary mr-1" onclick="viewbill('<?php  echo $row['BillNo'] ?>')">View Bill</button><button class="btn btn-danger">X</button></td>
+                      <td><button class="btn btn-primary mr-1" onclick="viewbill('<?php  echo $row['BillNo'] ?>')">View Bill</button>
+                      <button class="btn btn-danger" onclick="Deletebill('<?php  echo $row['BillId'] ?>')">X</button></td>
                                 
                       
                     </tr>
@@ -124,13 +125,13 @@ $_SESSION['BillNO']='';
 
  
 
-    function deletedata(deleteid)
+    function Deletebill(salesdeleteid)
     {
-        // alert(id); 
+        // alert(salesdeleteid); 
         
   swal({
     title: "Are you sure?",
-    text: "Once deleted, you will not be able to recover this Grade!",
+    text: "Once deleted, you will not be able to recover this Bill!",
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -139,9 +140,11 @@ $_SESSION['BillNO']='';
     if (willDelete) {
 
       $.ajax({
-                    url: "grade_backend.php",
+                    url: "sales_backend.php",
                     type: "POST",
-                    data: {deleteid:deleteid},
+                    data: {
+                      salesdeleteid:salesdeleteid
+                    },
                     success:function(data) {
                       swal("Poof! Your imaginary file has been deleted!", {
                         icon: "success",

@@ -123,7 +123,7 @@ function increamenttempbillvalue($con)
 }
 
 function getprefix($con) {
-  $selectquery = "SELECT * FROM `firmmaster` where `FirmId`='2'";
+  $selectquery = "SELECT * FROM `firmmaster` where `FirmId`='1'";
   // echo $selectquery;
   $prefixname="No Record Found";
 $result = mysqli_query($con, $selectquery);
@@ -257,6 +257,20 @@ function deleteTempsalesdata($con,$TempID)
 		  $sql="DELETE FROM `tempsalesdetails` WHERE `id`='$TempID'";
 		  mysqli_query($con,$sql);
 }
+
+function deletesalesdtls($con,$deleteid)
+{
+		  $sql="DELETE FROM `salesdetails` WHERE `BillId`='$deleteid'";
+      echo $sql;
+		  mysqli_query($con,$sql);
+}
+function deletesales($con,$deleteid)
+{
+		  $sql="DELETE FROM `sales` WHERE `BillId`='$deleteid'";
+      echo $sql;
+		  mysqli_query($con,$sql);
+}
+
 
 function getgradenamebychildcode($con,$childcode)
 {

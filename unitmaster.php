@@ -9,7 +9,7 @@ include('header/header.php');
     <div class="section-body">
       <!-- add content here -->
 
-      <h3>Category Master</h3>
+      <h3>Unit Master</h3>
       <div class="row justify-content-end">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Create New Unit</button>
       </div>

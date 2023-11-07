@@ -30,9 +30,9 @@ include('functions.php');
 	isset($_POST['upfirmno']) && isset($_POST['upfirmemail']) && isset($_POST['upfirmgst']) && isset($_POST['upfirmpan']) && isset($_POST['upprifix']))
 {
 
-   $updatefirmsql="UPDATE `firmmaster` SET `FirmName`='$upfirmname',`FirmAddress`='$upfirmaddress',`FirmDisc`='$upfirmdisc',`FirmNo`='$upfirmno',`FirmEmail`='$upfirmemail',`FirmGst`='$uptxtgstin',`FirmPAN`='$upfirmpan',`prefix`='$upprifix' WHERE `FirmId`='$hidden_id'";
+   $updatefirmsql="UPDATE `firmmaster` SET `FirmName`='$upfirmname',`FirmAddress`='$upfirmaddress',`FirmDisc`='$upfirmdisc',`FirmNo`='$upfirmno',`FirmEmail`='$upfirmemail',`FirmGst`='$upfirmgst',`FirmPAN`='$upfirmpan',`prefix`='$upprifix' WHERE `FirmId`='$hidden_id'";
 
-        echo $updatefirmsql;
+        // echo $updatefirmsql;
 
             if(mysqli_query($con,$updatefirmsql))
             {			

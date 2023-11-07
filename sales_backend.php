@@ -123,13 +123,12 @@ if (isset($_POST['itemid']) && isset($_POST['getdata']))
 		}
 
 		///delete data
-	if(isset($_POST['deleteid']))
+	if(isset($_POST['salesdeleteid']))
 		{
-				$deleteid=$_POST['deleteid'];
-		//   $sql="DELETE FROM `unitmaster` WHERE UnitID='$deleteid' ";
-		  $sql="UPDATE `bankmaster` SET `Status`='1' WHERE id='$deleteid' ";
-		  //echo($sql);
-		  mysqli_query($con,$sql);
+				$salesdeleteid=$_POST['salesdeleteid'];
+		
+		  deletesalesdtls($con,$salesdeleteid);
+		  deletesales($con,$salesdeleteid);
 
 		}
 

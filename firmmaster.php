@@ -321,7 +321,7 @@ $res=mysqli_query($con,$selectmenulist);
         // alert("Successfully");
         var Firmdata = JSON.parse(data);
         console.log(Firmdata);
-        $('#hidden_id').val(updateid);
+        $('#hiddden_id').val(updateid);
         $('#uptxtfirmname').val(Firmdata.FirmName);
         $('#uptxtaddress').val(Firmdata.FirmAddress);
         $('#uptxtdisc').val(Firmdata.FirmDisc);
@@ -339,7 +339,7 @@ $res=mysqli_query($con,$selectmenulist);
 
     function updatecate() {
       // alert('updauingthi the file');
-      var hidden_id = $('#hidden_id').val();
+      var hidden_id = $('#hiddden_id').val();
       var upfirmname = $('#uptxtfirmname').val();
       var upfirmaddress = $('#uptxtaddress').val();
       var upfirmdisc = $('#uptxtdisc').val();
@@ -349,7 +349,7 @@ $res=mysqli_query($con,$selectmenulist);
       var upfirmpan = $('#uptxtpan').val();
       var upprifix = $('#uptxtprifix').val();
      
-
+// alert(hidden_id+"-"+upfirmname+"-"+upfirmaddress+"-"+upfirmdisc+"-"+upfirmno+"-"+upfirmemail+"-"+upfirmgst+"-"+upfirmpan+"-"+upprifix);
      $.ajax({
         url: "firm_backend.php",
         type: "POST",
@@ -362,10 +362,11 @@ $res=mysqli_query($con,$selectmenulist);
           upfirmemail: upfirmemail,
           upfirmgst: upfirmgst,                  
           upfirmpan: upfirmpan,   
-          upprifix: upprifix,       
+          upprifix: upprifix   
         },
         success: function(data) {
           console.log(data);
+          location.reload();
         },
       });
     }
